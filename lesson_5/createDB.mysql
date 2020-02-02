@@ -1,0 +1,26 @@
+/* Команды для создания базы данных MySQL */
+/* Команды можно вводить набирать как верхнем регистре, так и в нижнем */
+/* Каждая команда обязательно заканчивается знаком ";" */
+
+create database gallery default character set utf8;
+
+use gallery;
+create table photo
+	(ID int not null primary key auto_increment,
+	 URL varchar(50) not null,
+	 size int not null,
+	 name varchar(50) not null
+	);
+
+insert into photo (URL, size, name) values ('images/','149','izmailovo_1.jpg');
+insert into photo (URL, size, name) values ('images/','984','izmailovo_2.jpg');
+insert into photo (URL, size, name) values ('images/','40','izmailovo_3.jpg');
+insert into photo (URL, size, name) values ('images/','314','kazan_1.jpg');
+insert into photo (URL, size, name) values ('images/','73','kazan_2.jpg');
+insert into photo (URL, size, name) values ('images/','32','kazan_3.jpg');
+insert into photo (URL, size, name) values ('images/','396','nizhniy_1.jpg');
+insert into photo (URL, size, name) values ('images/','2300','nizhniy_2.png');
+insert into photo (URL, size, name) values ('images/','530','nizhniy_3.jpg');
+insert into photo (URL, size, name) values ('images/','2200','peterhof_1.png');
+insert into photo (URL, size, name) values ('images/','512','peterhof_2.jpg');
+insert into photo (URL, size, name) values ('images/','238','peterhof_3.jpg');
