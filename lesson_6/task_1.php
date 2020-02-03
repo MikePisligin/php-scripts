@@ -41,16 +41,16 @@ Gallery($result);*/
 <?php
 
 function getSrcData($key, $flag) {
+ 
+ for ($i=0; $i<strlen($key); $i++) {
 
- for ($i=0; $i<strlen($expr); $i++) {
-
-  if ($expr[$i] == '+' or $expr[$i] == '-' or $expr[$i] == '*' or $expr[$i] == '/') {
-    $sign = $expr[$i];
+  if ($key[$i] == '+' or $key[$i] == '-' or $key[$i] == '*' or $key[$i] == '/') {
+    $sign = $key[$i];
     $flag = $i;
    } else if ($i > $flag) {
-      $secondTerm .= $expr[$i];
+      $secondTerm .= $key[$i];
      } else {
-        $firstTerm .= $expr[$i];
+        $firstTerm .= $key[$i];
        };
  }
 
@@ -74,19 +74,15 @@ function Divide($a, $b, $sign) {
 
 $expr = $_POST['key'];
 $flag = 10000;
+
 $arr = getSrcData($expr, $flag);
 
-var_dump($arr);
-
-/*switch($sign) {
- case "+": echo Add($firstTerm, $secondTerm, $sign); break;
- case "-": echo Subst($firstTerm, $secondTerm, $sign); break;
- case "*": echo Multiple($firstTerm, $secondTerm, $sign); break;
- case "/": echo Divide($firstTerm, $secondTerm, $sign); break;
-}*/
-
-// echo $firstTerm . '<br>' . $sign . '<br>' . $secondTerm;
-
+switch($arr['sign']) {
+ case "+": echo Add($arr['firstTerm'], $arr['secondTerm'], $arr['sign']); break;
+ case "-": echo Subst($arr['firstTerm'], $arr['secondTerm'], $arr['sign']); break;
+ case "*": echo Multiple($arr['firstTerm'], $arr['secondTerm'], $arr['sign']); break;
+ case "/": echo Divide($arr['firstTerm'], $arr['secondTerm'], $arr['sign']); break;
+}
 
 ?>
 
