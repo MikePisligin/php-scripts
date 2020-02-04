@@ -1,0 +1,56 @@
+<?php
+
+/* Функция выделяет из заданной строки операнды и знак операции */
+/* Входные параметры: строка, задающая пример и переменная $flag=1000 */
+function getSrcData($key, $flag) {
+ 
+ for ($i=0; $i<strlen($key); $i++) {
+
+  if ($key[$i] == '+' or $key[$i] == '-' or $key[$i] == '*' or $key[$i] == '/') {
+    $sign = $key[$i];
+    $flag = $i;
+   } else if ($i > $flag) {
+      $secondTerm .= $key[$i];
+     } else {
+        $firstTerm .= $key[$i];
+       };
+ }
+
+return ['firstTerm' => $firstTerm, 'secondTerm' => $secondTerm, 'sign' => $sign];
+}
+
+/* Блок функций, выполняющих математические операции */
+function Add($a, $b, $sign) {
+ return $sign = $a + $b;
+}
+function Subst($a, $b, $sign) {
+ return $sign = $a - $b;
+}
+function Multiple($a, $b, $sign) {
+ return $sign = $a * $b;
+}
+function Divide($a, $b, $sign) {
+ return $sign = $a / $b;
+}
+/*****************************************************/
+/* Функция выполняет арифметические операции */
+/* Она принимает в качестве входных параметров первый и второй операнд, и знак операции */
+/* Она возвращает рещультат операции */
+function Calculate($a, $b, $sign) {
+ switch($sign) {
+  case "+": $result =  Add($a, $b, $sign); break;
+  case "-": $result =  Subst($a, $b, $sign); break;
+  case "*": $result =  Multiple($a, $b, $sign); break;
+  case "/":
+ 	 if ($b <> 0) {
+	  $result =  Divide($a, $b, $sign);
+        } else {
+	   $message = "На ноль делить нельзя! Введите, пожалуйста, другой пример.";
+	   $result = NULL;
+	 };
+ }
+
+return ['1' => $result, '2' => $message];
+}
+
+?>
