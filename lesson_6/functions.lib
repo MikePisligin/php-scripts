@@ -36,21 +36,4 @@ function Divide($a, $b, $sign) {
 /* Функция выполняет арифметические операции */
 /* Она принимает в качестве входных параметров первый и второй операнд, и знак операции */
 /* Она возвращает рещультат операции */
-function Calculate($a, $b, $sign) {
- switch($sign) {
-  case "+": $result =  Add($a, $b, $sign); break;
-  case "-": $result =  Subst($a, $b, $sign); break;
-  case "*": $result =  Multiple($a, $b, $sign); break;
-  case "/":
- 	 if ($b <> 0) {
-	  $result =  Divide($a, $b, $sign);
-        } else {
-	   $message = "На ноль делить нельзя! Введите, пожалуйста, другой пример.";
-	   $result = NULL;
-	 };
- }
-
-return ['1' => $result, '2' => $message];
-}
-
 ?>

@@ -2,9 +2,23 @@
 
 include 'functions.lib';
 
-$result = Calculate($_POST['operand_1'], $_POST['operand_2'], $_POST['sign']);
+$result = $_POST['expression'] . $_POST['sign'];
 
-echo $result;
+$flag = 10000;
+$arr = getSrcData($_POST['expression'], $flag);
+
+switch($arr['sign']) {
+ case "+": $result =  Add($arr['firstTerm'], $arr['secondTerm'], $arr['sign']); break;
+ case "-": $result =  Subst($arr['firstTerm'], $arr['secondTerm'], $arr['sign']); break;
+ case "*": $result =  Multiple($arr['firstTerm'], $arr['secondTerm'], $arr['sign']); break;
+ case "/":
+ 	if ($arr['secondTerm'] <> 0) {
+	 $result =  Divide($arr['firstTerm'], $arr['secondTerm'], $arr['sign']);
+       } else {
+	  $message = "На ноль делить нельзя! Введите, пожалуйста, другой пример.";
+	  $result = NULL;
+	};
+}
 
 ?>
 
@@ -22,15 +36,12 @@ echo $result;
  <div class="left">
   <p class="hint"><u>Подсказка:</u> введите пример в следующем формате: 1+2 или 2-1 или 1*2 или 2/1. Учтите, что на ноль делить нельзя!</p>
   <form method="post">
-   <input class="inputField" name="operand_1" type="text">
-   <input class="inputField" name="operand_2" type="text">
-   <input class="inputField" type="text" value="<?php echo $result; ?>">
-   <div class="block_button">
-    <input class="button" name="sign" type="submit" value="+">
-    <input class="button" name="sign" type="submit" value="-">
-    <input class="button" name="sign" type="submit" value="*">
-    <input class="button" name="sign" type="submit" value="/">
-   </div>
+   <input class="inputField" name="expression" type="text" value="<?php echo $result; ?>">
+   <input class="button" name="sign" type="submit" value="+">
+   <input class="button" name="sign" type="submit" value="-">
+   <input class="button" name="sign" type="submit" value="*">
+   <input class="button" name="sign" type="submit" value="/">
+   <input class="calcButton" type="submit" value="Вычислить">
   </form>
  </div>
  <div class="right">
