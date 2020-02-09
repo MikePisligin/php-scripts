@@ -1,0 +1,35 @@
+<?php
+/* Функция выполняет подключение к базе данных */
+/* Возвращает объект, содержащий сведения о подключении */
+function connectSQL() {
+  $link = mysqli_connect('127.0.0.1', 'root', 'mysql12345', 'fruits');
+
+  return $link;
+}
+
+/* Функция создаёт галерею фотографий на главной странице */
+/* Принимаемое значение - объект, содержащий данные из запроса к базе */
+function Catalog($result) {
+
+while ($row = mysqli_fetch_assoc($result)) {
+
+    $path = $row["path"] . $row["name_file"];
+
+    if (file_exists($path)) {
+     echo "<a href=\"productCard.php?id=" . $row['ID'] . "\"><img src=\"" . $path . "\"></a>";
+  }  else {
+   echo "Файл с именем " . $path . " не существует!";
+  }
+ }
+}
+
+/* Функция отображает фотографию с оригинальными размерами на второстепенной странице */
+/* Принимаемое значение - объект, содержащий данные из запроса к базе */
+function drawPicture($result) {
+  $row = mysqli_fetch_assoc($result);
+  $path = $row['path'] . $row['name_file'];
+
+  echo "<img src=\"" . $path . "\">";
+}
+
+?>
