@@ -1,0 +1,72 @@
+<?php
+/* Функция выполняет подключение к базе данных */
+/* Возвращает объект, содержащий сведения о подключении */
+function connectSQL() {
+  $link = mysqli_connect('127.0.0.1', 'user1', 'Qwerty@345', 'shop');
+
+  return $link;
+}
+
+/* Функция создаёт галерею фотографий на главной странице */
+/* Принимаемое значение - объект, содержащий данные из запроса к базе */
+function Catalog($result) {
+
+while ($row = mysqli_fetch_assoc($result)) {
+
+    $path = $row["path"] . $row["name_file"];
+
+    if (file_exists($path)) {
+     echo "<a href=\"productCard.php?id=" . $row['ID'] . "\"><img src=\"" . $path . "\"></a>";
+  }  else {
+   echo "Файл с именем " . $path . " не существует!";
+  }
+ }
+}
+
+/* Функция отображает фотографию с оригинальными размерами на второстепенной странице */
+/* Принимаемое значение - объект, содержащий данные из запроса к базе */
+function drawPicture($result) {
+  $row = mysqli_fetch_assoc($result);
+  $path = $row['path'] . $row['name_file'];
+
+  echo "<img src=\"" . $path . "\">";
+}
+
+/*
+
+*/
+function printPage ($fruit) {
+ switch ($fruit) {
+  case 1: echo "Яблоки"; break;
+  case 2: echo "Груши"; break;
+  case 3: echo "Апельсины"; break;
+  case 4: echo "Бананы"; break;
+  case 5: echo "Мандарины"; break;
+  case 6: echo "Грейпфруты"; break;
+  case 7: echo "Лимоны"; break;
+  case 8: echo "Персики"; break;
+  case 9: echo "Абрикосы"; break;
+ }
+}
+
+function toPrice ($link) {
+
+ $sql = "select * from fruits where id='" . $_GET['id'] . "'";  
+ $result = mysqli_query($link, $sql); 
+
+ $row = mysqli_fetch_assoc($result);
+
+ return $row['price'];
+}
+
+function toDesc ($link) {
+
+ $sql = "select description from fruits where id='" . $_GET['id'] . "'";  
+ $result = mysqli_query($link, $sql); 
+
+ $row = mysqli_fetch_assoc($result);
+ echo $row['description'];
+ return $row['description'];
+}
+
+?>
