@@ -12,6 +12,16 @@
  margin: 0 auto;
  width: 1000px;
 }
+.headerUp {
+ display: flex;
+ justify-content:space-between;
+}
+.linkCart {
+ text-decoration: none;
+ color: #f4961a;
+ font-size: 20pt;
+ margin: 15px 0px;
+}
 .textStyle { font-family: 'Caveat', cursive; color: #f4961a; font-size: 18pt; }
 .header {
  text-align: center;
@@ -62,8 +72,6 @@
  font-family: 'Caveat', cursive;
  font-size: 14pt;
 }
-
-
 .container p {
  margin: 30px;
 }

@@ -5,8 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
 </head>
-<body class="container">
+<body class="container2">
+  <h1 class="textStyle header">Интернет-магазин "Фрукты"</h1>
   <div class="gallery">
 <?php
 

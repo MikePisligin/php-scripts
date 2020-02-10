@@ -16,11 +16,15 @@ $result = mysqli_query($link, $sql);
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/dfbe07ac44.js" crossorigin="anonymous"></script>
 </head>
 <body class="container2">
-
- <h4 class="textStyle">Интернет-магазин по продаже фруктов</h4>
+ 
+ <div class="headerUp">
+  <h4 class="textStyle">Интернет-магазин по продаже фруктов</h4>
+  <a class="linkCart" href="#" title="Перейти в корзину"><i class="fas fa-shopping-cart"></i></a>
+ </div>
  <h1 class="textStyle header"><?php printPage ($_GET['id']); ?></h1>
 
  <div class="mainContent">
