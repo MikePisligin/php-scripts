@@ -28,7 +28,7 @@ Gallery($result);*/
  <div class="left">
   <p class="hint"><u>Подсказка:</u> введите пример в следующем формате: 1+2 или 2-1 или 1*2 или 2/1. Учтите, что на ноль делить нельзя!</p>
   <form method="post">
-   <input class="inputField" name="key" type="<? $result ?>">
+   <input class="inputField" name="key" type="text">
    <input class="button" type="submit" value="Вычислить">
   </form>
  </div>
