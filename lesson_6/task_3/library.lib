@@ -2,7 +2,11 @@
 /* Функция выполняет подключение к базе данных */
 /* Возвращает объект, содержащий сведения о подключении */
 function connectSQL() {
+<<<<<<< HEAD
   $link = mysqli_connect('127.0.0.1', 'root', 'mysql12345', 'gallery');
+=======
+  $link = mysqli_connect('127.0.0.1', 'root', 'Qwerty@345', 'gallery');
+>>>>>>> fc802da9de901189269ff852a7054ae8dd045921
 
   return $link;
 }
