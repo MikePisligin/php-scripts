@@ -6,9 +6,11 @@
   <title>Document</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/dfbe07ac44.js" crossorigin="anonymous"></script>
 </head>
 <body class="container2">
   <h1 class="textStyle header">Интернет-магазин "Фрукты"</h1>
+  <div class="cartMain"><a class="linkCart" href="cart.php" title="Перейти в корзину"><i class="fas fa-shopping-cart"></i></a></div>
   <div class="gallery">
 <?php
 
@@ -22,12 +24,6 @@ $sql = "select ID,path,name_file from fruits";
 $result = mysqli_query($link, $sql);
 
 Catalog($result);
-
-/*$_SESSION['0'] = [
-	'key1' => 'string1',
-	'key2' => 'string2',
-];*/
-var_dump($_SESSION);
 
 /* Функция закрывает соединение к базе данных */
 mysqli_close($link);

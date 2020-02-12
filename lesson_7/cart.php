@@ -1,7 +1,7 @@
 <?php
 /* Библиотечный файл, содержащий все необходимые функции для данной программы */
 include 'library.lib';
-// startSession();
+startSession();
 
 $link = connectSQL();
 
@@ -26,19 +26,49 @@ $result = mysqli_query($link, $sql);
   <h4 class="textStyle">Интернет-магазин по продаже фруктов</h4>
   <p><a class="linkBigPhoto" href="task_1.php">На главную</a></p>
  </div>
-
  <div class="cart">
-  <div>
-   <img src="images/apple.jpg">
-   <p>Яблоко</p>
-   <form>
-    <input type="submit">
-    <input type="text">
-    <input type="submit">
-    <input type="text">
-    <input type="submit">
-   </form>
-  </div>
+
+<?php
+
+foreach ($_SESSION as $key => $value) {
+
+  $sql = "select path, name_file from fruits where name='" . $key . "'";
+  $result = mysqli_query($link, $sql);
+  $row = mysqli_fetch_assoc($result);
+  $path = $row['path'] . $row['name_file'];
+
+  echo "<div class=\"product\">";
+  echo "<img src=\"" . $path . "\">";
+  echo "<p class=\"title\">" . $_SESSION[$key][0] . "</p>";
+  echo "<p class=\"titleSm\">Количество, кг: </p>";
+  echo "<form>";
+  echo "<input type=\"text\" value=\"" . $_SESSION[$key]['quantity'] . "\" readonly>";
+  echo "</form>";
+
+  $k = key($_SESSION);
+
+  echo "<a class=\"buttonCart\" href=\"?name=" . $k . "&action=i\">+</a>";
+  echo "<a class=\"buttonCart\" href=\"?name=" . $k . "&action=d\">-</a>";
+  echo "<a class=\"buttonCart\" href=\"?name=" . $k . "&action=r\">X</a>";
+  
+  echo "</div>";
+
+  if(($_GET['name'] == $k) && ($_GET['action'] == 'i')) {
+   $_SESSION[$key]['quantity'] += 1;
+ };
+
+  if(($_GET['name'] == $k) && ($_GET['action'] == 'd')) {
+   $_SESSION[$key]['quantity'] -= 1;
+ };
+ if(($_GET['name'] == $k) && ($_GET['action'] == 'r')) {
+   $_SESSION[$key] = null;
+ };
+
+ }
+
+?>
+
+
  </div>
 
 <?php /* Функция закрывает соединение к базе данных */

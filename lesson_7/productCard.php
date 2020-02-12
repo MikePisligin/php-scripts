@@ -1,7 +1,7 @@
 <?php
 /* Библиотечный файл, содержащий все необходимые функции для данной программы */
 include 'library.lib';
-// startSession();
+startSession();
 
 $link = connectSQL();
 
@@ -41,15 +41,40 @@ $result = mysqli_query($link, $sql);
       <input class="button" type="submit" value="Купить">
       <?php
 
-/*$goods = Array("fruit" => $_GET['id'],"quantity" => $_POST['quantity']);
-       array_push($_SESSION, $goods);
+        $sql = "select name from fruits where id='" . $_GET['id'] . "'";  
+        $result = mysqli_query($link, $sql);
 
-       if (array_key_exists('0', $_SESSION)) {
-
-        $a = key($_SESSION)+4;
-        $goods = Array("fruit" => $_GET['id'],"quantity" => $_POST['quantity']);
-	array_push($_SESSION[$a], $goods);
-      }*/
+	$row = mysqli_fetch_assoc($result);
+	
+        switch($row['name']) {
+          case 'Apples':
+                   $_SESSION[$row['name']] = Array("Яблоки","quantity" => $_POST['quantity']);
+                   break;
+          case 'Pears':
+                   $_SESSION[$row['name']] = Array("Груши","quantity" => $_POST['quantity']);
+                   break;
+          case 'Oranges':
+                   $_SESSION[$row['name']] = Array("Апельсины","quantity" => $_POST['quantity']);
+                   break;
+          case 'Bananas':
+                   $_SESSION[$row['name']] = Array("Бананы","quantity" => $_POST['quantity']);
+                   break;
+          case 'Tangerines':
+                   $_SESSION[$row['name']] = Array("Мандарины","quantity" => $_POST['quantity']);
+                   break;
+          case 'Grapefruits':
+                   $_SESSION[$row['name']] = Array("Грейпфруты","quantity" => $_POST['quantity']);
+                   break;
+          case 'Lemons':
+                   $_SESSION[$row['name']] = Array("Лимоны","quantity" => $_POST['quantity']);
+                   break;
+          case 'Peach':
+                   $_SESSION[$row['name']] = Array("Персики","quantity" => $_POST['quantity']);
+                   break;
+          case 'Apricot':
+                   $_SESSION[$row['name']] = Array("Абрикосы","quantity" => $_POST['quantity']);
+                   break;
+        }
 
       ?>
      </form>

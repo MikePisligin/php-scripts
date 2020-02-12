@@ -15,6 +15,7 @@
 .headerUp {
  display: flex;
  justify-content:space-between;
+ margin-bottom: 30px;
 }
 .linkCart {
  text-decoration: none;
@@ -116,4 +117,40 @@
 }
 .form input:last-child {
  margin-left: 30px;
+}
+.cartMain {
+ display: flex;
+ justify-content: flex-end;
+}
+.product { display: flex; align-items: center; justify-content: center; }
+.product img { width: 100px; height: 100px; }
+.title {
+ font-family: 'Caveat', cursive;
+ color: #f4961a;
+ margin: 20px 25px;
+ font-size: 24pt;
+}
+
+.product input {
+ padding: 5px;
+ width: 33px;
+}
+.titleSm {
+ font-family: 'Caveat', cursive;
+ color: #f4961a;
+ margin: 20px 5px;
+ font-size: 16pt;
+}
+.buttonCart {
+ width: 25px;
+ height: 25px;
+ text-decoration: none;
+ text-align: center;
+ color: #f4961a;
+ border-radius: 15px;
+ background: #f7ed82;
+ font-weight: 700;
+ font-family: 'Caveat', cursive;
+ font-size: 14pt;
+ margin-left: 20px;
 }

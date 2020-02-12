@@ -11,15 +11,16 @@ create table fruits
 	 path varchar(70) not null,
 	 name_file varchar(70) not null,
 	 price float not null,
-	 quantity int not null
+	 quantity int not null,
+         description varchar(1000)
 	);
 
-insert into fruits (name, path, name_file, price, quantity) values ('Apples','images/','apple.jpg','85','200');
-insert into fruits (name, path, name_file, price, quantity) values ('Pears','images/','pear.jpg','105','160');
-insert into fruits (name, path, name_file, price, quantity) values ('Oranges','images/','orange.jpg','70','80');
-insert into fruits (name, path, name_file, price, quantity) values ('Bananas','images/','banana.jpg','55','300');
-insert into fruits (name, path, name_file, price, quantity) values ('Tangerines','images/','tangerine.jpeg','75','190');
-insert into fruits (name, path, name_file, price, quantity) values ('Grapefruits','images/','grapefruit.jpg','115','120');
-insert into fruits (name, path, name_file, price, quantity) values ('Lemons','images/','lemon.jpg','85','200');
-insert into fruits (name, path, name_file, price, quantity) values ('Peach','images/','peach.jpg','120','65');
-insert into fruits (name, path, name_file, price, quantity) values ('Apricot','images/','apricot.jpg','65','170');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Apples','images/','apple.jpg','85','200','description');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Pears','images/','pear.jpg','105','160','description');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Oranges','images/','orange.jpg','70','80','description');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Bananas','images/','banana.jpg','55','300','description');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Tangerines','images/','tangerine.jpeg','75','190','description');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Grapefruits','images/','grapefruit.jpg','115','120','description');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Lemons','images/','lemon.jpg','85','200','description');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Peach','images/','peach.jpg','120','65','description');
+insert into fruits (name, path, name_file, price, quantity, description) values ('Apricot','images/','apricot.jpg','65','170','description');
