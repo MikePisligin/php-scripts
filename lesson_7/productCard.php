@@ -1,6 +1,7 @@
 <?php
 /* Библиотечный файл, содержащий все необходимые функции для данной программы */
 include 'library.lib';
+// startSession();
 
 $link = connectSQL();
 
@@ -23,7 +24,7 @@ $result = mysqli_query($link, $sql);
  
  <div class="headerUp">
   <h4 class="textStyle">Интернет-магазин по продаже фруктов</h4>
-  <a class="linkCart" href="#" title="Перейти в корзину"><i class="fas fa-shopping-cart"></i></a>
+  <a class="linkCart" href="cart.php" title="Перейти в корзину"><i class="fas fa-shopping-cart"></i></a>
  </div>
  <h1 class="textStyle header"><?php printPage ($_GET['id']); ?></h1>
 
@@ -36,8 +37,21 @@ $result = mysqli_query($link, $sql);
     <div class="rightP1">
      <p class="text"><?php $r = toPrice($link); echo "Цена за кг: " . $r . " рублей"; ?></p>
      <form method="post">
-      <input class="textField" type="text" placeholder="0">
+      <input class="textField" name='quantity' type="text" placeholder="0">
       <input class="button" type="submit" value="Купить">
+      <?php
+
+/*$goods = Array("fruit" => $_GET['id'],"quantity" => $_POST['quantity']);
+       array_push($_SESSION, $goods);
+
+       if (array_key_exists('0', $_SESSION)) {
+
+        $a = key($_SESSION)+4;
+        $goods = Array("fruit" => $_GET['id'],"quantity" => $_POST['quantity']);
+	array_push($_SESSION[$a], $goods);
+      }*/
+
+      ?>
      </form>
     </div>
     <div class="rightP2">

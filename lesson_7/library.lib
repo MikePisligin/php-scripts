@@ -1,10 +1,34 @@
 <?php
+
+/* Функция открывает сессию для работы с интернет-магазином */
+function startSession() {
+ session_start();
+}
+
 /* Функция выполняет подключение к базе данных */
 /* Возвращает объект, содержащий сведения о подключении */
 function connectSQL() {
   $link = mysqli_connect('127.0.0.1', 'user1', 'Qwerty@345', 'shop');
 
   return $link;
+}
+
+/* Функция записывает в сессию ID фруктов */
+function recordIdFruits ($link) {
+ $sql = "select ID from fruits";
+ $result = mysqli_query($link, $sql);
+ while ($row = mysql_fetch_assoc($result))
+ switch ($row['ID']) {
+  case '1': $_SESSION['apple'] = $row['ID']; break;
+  case '2': $_SESSION['pear'] = $row['ID']; break;
+  case '3': $_SESSION['orange'] = $row['ID']; break;
+  case '4': $_SESSION['banana'] = $row['ID']; break;
+  case '5': $_SESSION['tangerine'] = $row['ID']; break;
+  case '6': $_SESSION['grapefruit'] = $row['ID']; break;
+  case '7': $_SESSION['lemon'] = $row['ID']; break;
+  case '8': $_SESSION['peach'] = $row['ID']; break;
+  case '9': $_SESSION['apricot'] = $row['ID']; break;
+}
 }
 
 /* Функция создаёт галерею фотографий на главной странице */
@@ -21,6 +45,7 @@ while ($row = mysqli_fetch_assoc($result)) {
    echo "Файл с именем " . $path . " не существует!";
   }
  }
+
 }
 
 /* Функция отображает фотографию с оригинальными размерами на второстепенной странице */
@@ -32,9 +57,7 @@ function drawPicture($result) {
   echo "<img src=\"" . $path . "\">";
 }
 
-/*
-
-*/
+/* Функция отображает заголовок на странице товара. */
 function printPage ($fruit) {
  switch ($fruit) {
   case 1: echo "Яблоки"; break;
@@ -49,9 +72,10 @@ function printPage ($fruit) {
  }
 }
 
+/* Функция позволяет получить цену товара. */
 function toPrice ($link) {
 
- $sql = "select * from fruits where id='" . $_GET['id'] . "'";  
+ $sql = "select price from fruits where id='" . $_GET['id'] . "'";  
  $result = mysqli_query($link, $sql); 
 
  $row = mysqli_fetch_assoc($result);
@@ -59,6 +83,7 @@ function toPrice ($link) {
  return $row['price'];
 }
 
+/* Функция позволяет получить описание товара. */
 function toDesc ($link) {
 
  $sql = "select description from fruits where id='" . $_GET['id'] . "'";  
@@ -68,5 +93,4 @@ function toDesc ($link) {
  echo $row['description'];
  return $row['description'];
 }
-
 ?>

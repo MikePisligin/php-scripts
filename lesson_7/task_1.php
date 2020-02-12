@@ -14,6 +14,7 @@
 
 /* Библиотечный файл, содержащий все необходимые функции для данной программы */
 include 'library.lib';
+startSession();
 
 $link = connectSQL();
 
@@ -21,6 +22,12 @@ $sql = "select ID,path,name_file from fruits";
 $result = mysqli_query($link, $sql);
 
 Catalog($result);
+
+/*$_SESSION['0'] = [
+	'key1' => 'string1',
+	'key2' => 'string2',
+];*/
+var_dump($_SESSION);
 
 /* Функция закрывает соединение к базе данных */
 mysqli_close($link);
