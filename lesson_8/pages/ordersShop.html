@@ -47,8 +47,12 @@
 
 <script>
 
+
+    /* после полной загрузки страницы выполняется JS-код */
+    /* этот выводит информацию о заказах всех пользователей админисратору */
     window.addEventListener("load", function() {
 
+        /* отправить AJAX-запрос на сервер */
         var xhr = new XMLHttpRequest();
         xhr.open("get", "../php_scripts/requestUserOrder.php", true);
 
@@ -57,12 +61,23 @@
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
 
+                /* AJAX-запрос вернул данные о заказах в формате JSON */
+                /* преобразовать JSON-данные в объект JavaScript */
                 var buf = JSON.parse(xhr.responseText);
               
                 var elem = document.getElementById('headerLK');
                 elem.textContent = "Добро пожаловать в кабинет администратора сайта.";
                 
                 var i=2;
+
+                /* - orderDate - ссылка на html-элемент с датой заказа; */
+                /* - orderLogin - ссылка на html-элемент с никнеймом пользователя; */
+                /* - orderName - ссылка на html-элемент с именем пользователя; */
+                /* - orderImg - ссылка на html-элемент с иконкой товара; */
+                /* - orderCost - ссылка на html-элемент с ценой товара; */
+                /* - orderStatus - ссылка на html-элемент со статусом заказа. */
+                /* Статусы заказа содержатся в раскрывающемся списке select */
+                /* Статус, хранимый в базе данных, отображается пользователю */
                 while(i < buf.length) {
 
                     var orderDate = document.createElement("p");
@@ -113,6 +128,9 @@
                     orderLink.myBuf = buf[i].prod_name;
                     orderLink.textContent = "Применить";
                     orderLink.href = "#";
+
+                    /* Обработчик щелчка по ссылке Применить */
+                    /* При нажатии на ссылку формируется AJAX-запрос и отправляется серверу */
                     orderLink.onclick = function apply() {
 
                         var elem = document.getElementById('orderSelect');
