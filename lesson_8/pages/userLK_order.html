@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = "UTF8">
+    <title>Интернет-магазин модной одежды</title>
+    <link rel="stylesheet" href="../css_styles/styles_userLK.css">
+</head>
+
+<body>
+<div class="content">
+
+    <div class="header">
+
+        <div class="header-left">
+            <ul type="none">
+                <li><a href="#">Главная</a></li>
+                <li><a href="catalog.html">Каталог товаров</a></li>
+            </ul>
+        </div>
+
+        <div class="header-right">
+            <p><a href="userLK.html">Личный кабинет</a></p>
+            <p><a href="../php_scripts/exitLK.php">Выход</a></p>
+        </div>
+
+    </div>
+
+    <div class="LK">
+
+        <div class="leftLK">
+            <ul type="none">
+                <li><a href="userLK.html">Мои данные</a></li>
+                <li><a href="userLK_order.html">Мои заказы</a></li>
+            </ul>
+        </div>
+        <div class="rightLK">
+            <h3 id="headerLK" class="headerLK"></h3>
+            <div id="orders" class="orders">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    window.addEventListener("load", function() {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", "../php_scripts/requestUserOrder.php", true);
+
+        xhr.send(null);
+
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                 var buf = JSON.parse(xhr.responseText);
+
+                var elem = document.getElementById('headerLK');
+                elem.textContent = "Добро пожаловать в наш магазин, "+buf[0]+" "+buf[1]+"!";
+                
+                /* pattern - шаблон регулярного выражения для поиска цифр в строке */
+                var i=2, pattern = /[0-9][0-9]/, sum=0;
+                while(i < buf.length) {
+
+                    var orderDate = document.createElement("p");
+                    orderDate.textContent = buf[i].date;
+
+                    var orderImg = document.createElement("img");
+                    orderImg.src = buf[i].images;
+
+                    var orderName = document.createElement("p");
+                    orderName.textContent = buf[i].prod_name;
+
+                    var orderStatus = document.createElement("p");
+                    orderStatus.textContent = buf[i].status;
+
+                    var orderCost = document.createElement("p");
+                    orderCost.textContent = buf[i].cost;
+
+                    var orderDel = document.createElement('a');
+                    orderDel.href = "../php_scripts/orderDel.php?prod_name="+buf[i].prod_name;
+                    orderDel.id = buf[i].prod_name;
+                    orderDel.textContent = "Удалить";
+
+                    var orderRecord = document.createElement("div");
+                    orderRecord.className = "ordersRecord";
+
+                    orderRecord.appendChild(orderDate);
+                    orderRecord.appendChild(orderImg);
+                    orderRecord.appendChild(orderName);
+                    orderRecord.appendChild(orderStatus);
+                    orderRecord.appendChild(orderCost);
+                    orderRecord.appendChild(orderDel);
+
+                    elem = document.getElementById('orders');
+                    elem.appendChild(orderRecord);
+
+                    /* записать в переменную matches число */
+                    /* число получено из значения цены. Цена задана в формате - 49 EUR */
+                    /* метод exec ищет соответствие регулярному выражению в заданной строке */
+                    matches = Number(pattern.exec(buf[i].cost));
+
+                    /* переменная sum накапливает сумму заказа */
+                    sum += matches;
+
+                    i++;
+                }
+
+                /* в элемент orderSum (html-блок p) записать значение итоговой суммы заказа */
+                var orderSum = document.createElement('p');
+                orderSum.textContent = "Сумма вашего заказа = " + sum + " EUR";
+
+                elem.appendChild(orderSum);
+
+            }
+        }
+
+    }, false);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+Структура каталогов и файлов:
+
+1) index.html - файл, с которого начинается запуск интернет-магазина;
+2) css_styles - стили CSS;
+3) images - картинки для интернет-магазина;
+4) pages - html-страницы;
+5) php_scripts - php-сценарии.
+
+Структура каталога pages:
+
+1) pages/catalog.html - страница каталога товаров;
+2) pages/ctrlSite.html - личная страница администратора сайта;
+3) pages/orderShop.html - страница управления заказами администратором;
+4) pages/register.html - страница регистрации пользователя;
+5) pages/userLK.html - личная страница пользователя;
+6) pages/userLK_order.html - страница заказов пользователя.
+
+Структура каталога php_scripts:
+
+1) php_scripts/addToCart.php - добавление товара в заказ пользователем;
+2) php_scripts/apply.php - изменить статус заказа администратором;
+3) php_scripts/authoriz.php - авторизация пользователя или администратора в магазине;
+4) php_scripts/exitLK.php - выход из личного кабинета;
+5) php_scripts/orderDel.php - удаление товара из заказа;
+6) php_scripts/product.php - страница товара;
+7) php_scripts/registerUser.php - регистрация пользователя в интернет-магазине;
+8) php_scripts/requestProductInfo.php - запрос информация о товаре из базы данных;
+9) php_scripts/requestUserInfo.php - запрос информации о пользователе из базы данных;
+10) php_scripts/requestUserOrder.php - запрос заказов пользователя из базы данных.

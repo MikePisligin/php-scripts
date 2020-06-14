@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.content {
+    margin: 0 auto;
+    padding-top: 35px;
+}
+.content > div { padding: 25px 0 0 150px; }
+.header {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+.header-left li { margin-bottom: 15px; }
+.header-right { display: flex; }
+.header-right > p:first-child { margin-right: 20px; }
+
+.dataCtlg {
+    margin: 0 auto;    
+    display: flex;
+    flex-wrap: wrap;
+}
+.product {
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+.product img {
+    width: 500px;
+    height: 450px;
+}
+.product p {
+    padding-bottom: 15px;
+    padding-left: 25px;
+}
+.productSingle {
+    display: flex;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = "UTF8">
+    <title>Интернет-магазин модной одежды</title>
+    <link rel="stylesheet" href="css_styles/styles.css">
+</head>
+
+<body>
+    <div class="start">
+
+        <div class="entrance">
+            <a id="enter" href="#">Войти</a>
+            <a id="register" href="pages/register.html">Зарегистрироваться</a>
+        </div>
+    
+        <div class="credentials">
+            <p>Имя пользователя:</p>
+            <input id="login" type="text">
+            <p>Пароль:</p>
+            <input id="password" type="password">
+            <button id="authoriz">Войти</button>
+        </div>
+
+    </div>
+
+<script>
+
+var buttonEnter = document.getElementById("enter");
+buttonEnter.addEventListener("click", function() {
+    document.querySelector(".credentials").style.opacity = '1';
+    document.querySelector(".entrance").style.opacity = '0';
+    document.querySelector(".entrance").style.marginLeft = '0px';
+
+}, false);
+
+var buttonAuthoriz =  document.getElementById("authoriz");
+buttonAuthoriz.addEventListener("click", function() {
+
+    var userInfo = {
+        login: document.getElementById("login").value,
+        password: document.getElementById("password").value
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("post", "php_scripts/authoriz.php", true);
+
+    xhr.send(JSON.stringify(userInfo));
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var arr = JSON.parse(xhr.responseText);
+
+            if (arr[1] == 1) {
+                alert(arr[0]);
+            } else if (arr[1] == 0) {
+                
+                if (arr[2] == 1) {
+                    alert("Добро пожаловать в систему управления сайтом.");
+                    window.open("pages/ctrlSite.html", window.self);
+                } else {
+                    alert(arr[0]);
+                    window.open("pages/userLK.html", window.self);
+                }
+             
+            }
+        };
+    };
+
+}, false);
+
+</script>
+
+</body>
+
+</html>
