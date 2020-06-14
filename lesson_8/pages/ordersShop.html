@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = "UTF8">
+    <title>Интернет-магазин модной одежды</title>
+    <link rel="stylesheet" href="../css_styles/styles_userLK.css">
+</head>
+
+<body>
+<div class="content">
+
+    <div class="header">
+
+        <div class="header-left">
+            <ul type="none">
+                <li><a href="ordersShop.html">Заказы магазина</a></li>
+                <li><a href="addProduct.html">Добавить товар в каталог</a></li>
+                <li><a href="delProduct.html">Удалить товар из каталога</a></li>
+            </ul>
+        </div>
+
+        <div class="header-right">
+            <p><a href="ctrlSite.html">Личный кабинет</a></p>
+            <p><a href="../php_scripts/exitLK.php">Выход</a></p>
+        </div>
+
+    </div>
+
+    <div class="LK">
+
+        <div class="leftLK">
+            <ul type="none">
+                <li><a href="ctrlSite.html">Мои данные</a></li>
+            </ul>
+        </div>
+        <div class="rightLK">
+            <h3 id="headerLK" class="headerLK"></h3>
+            <div id="orders" class="orders">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    window.addEventListener("load", function() {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", "../php_scripts/requestUserOrder.php", true);
+
+        xhr.send(null);
+
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                var buf = JSON.parse(xhr.responseText);
+              
+                var elem = document.getElementById('headerLK');
+                elem.textContent = "Добро пожаловать в кабинет администратора сайта.";
+                
+                var i=2;
+                while(i < buf.length) {
+
+                    var orderDate = document.createElement("p");
+                    orderDate.textContent = buf[i].date;
+
+                    var orderLogin = document.createElement("p");
+                    orderLogin.textContent = buf[i].login;
+
+                    var orderName = document.createElement("p");
+                    orderName.textContent = buf[i].prod_name;
+
+                    var orderImg = document.createElement("img");
+                    orderImg.src = buf[i].images;
+
+                    var orderCost = document.createElement("p");
+                    orderCost.textContent = buf[i].cost;
+
+                    var orderStatus = document.createElement("select");
+                    orderStatus.size = 1;
+                    orderStatus.id = 'orderSelect';
+
+                    var opt1 = document.createElement("option");
+                    opt1.textContent = "Добавлен в заказ";
+                    var opt2 = document.createElement("option");
+                    opt2.textContent = "Отправлен покупателю";
+                    var opt3 = document.createElement("option");
+                    opt3.textContent = "Заказ оплачен";
+                    var opt4 = document.createElement("option");
+                    opt4.textContent = "Заказ получен";
+                    var opt5 = document.createElement("option");
+                    opt5.textContent = "Заказ закрыт";
+
+                    orderStatus.appendChild(opt3);
+                    orderStatus.appendChild(opt2);
+                    orderStatus.appendChild(opt1);
+                    orderStatus.appendChild(opt4);
+                    orderStatus.appendChild(opt5);
+
+                    for (var j=0; j<orderStatus.options.length; j++) {
+
+                        if (orderStatus.options[j].textContent == buf[i].status) {
+                            orderStatus.options[j].selected = true;
+                        };
+
+                    }
+
+                    var orderLink = document.createElement("a");
+                    orderLink.myBuf = buf[i].prod_name;
+                    orderLink.textContent = "Применить";
+                    orderLink.href = "#";
+                    orderLink.onclick = function apply() {
+
+                        var elem = document.getElementById('orderSelect');
+                        var o = {
+                            status: elem.value,
+                            prod_name: this.myBuf
+                        };
+                        
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("post","../php_scripts/apply.php", true);
+                        xhr.send(JSON.stringify(o));
+
+                        xhr.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                            alert("Статус заказа изменён");
+                        }
+                    }
+                        
+                };
+
+                    var orderRecord = document.createElement("div");
+                    orderRecord.className = "ordersRecord";
+
+                    orderRecord.appendChild(orderDate);
+                    orderRecord.appendChild(orderImg);
+                    orderRecord.appendChild(orderLogin);
+                    orderRecord.appendChild(orderName);
+                    orderRecord.appendChild(orderStatus);
+                    orderRecord.appendChild(orderCost);
+                    orderRecord.appendChild(orderLink);
+                    
+                    elem = document.getElementById('orders');
+                    elem.appendChild(orderRecord);
+
+                    i++;
+
+            }
+
+        }
+    }
+
+}, false);
+
+</script>
+
+</body>
+
+</html>
