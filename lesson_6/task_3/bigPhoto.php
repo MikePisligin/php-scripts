@@ -12,7 +12,7 @@
 /* Библиотечный файл, содержащий все необходимые функции для данной программы */
 include 'library.lib';
 
-$link = connectSQL();
+$link = mysqli_connect('172.18.0.2', 'mike', '124356+A', 'gallery');
 
 $sql = "select * from photo where id='" . $_GET['id'] . "'";  
 $result = mysqli_query($link, $sql);

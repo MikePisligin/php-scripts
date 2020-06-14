@@ -13,23 +13,12 @@
 /* Библиотечный файл, содержащий все необходимые функции для данной программы */
 include 'library.lib';
 
-<<<<<<< HEAD
-=======
-// $link = mysqli_connect('127.0.0.1', 'user1', 'Qwerty@345', 'gallery');
-
->>>>>>> fc802da9de901189269ff852a7054ae8dd045921
-$link = connectSQL();
+$link = mysqli_connect('172.18.0.2', 'mike', '124356+A', 'gallery');
 
 $sql = "select * from photo";
 $result = mysqli_query($link, $sql);
-<<<<<<< HEAD
 
 Gallery($result);
-=======
-var_dump($result);
-
-// Gallery($result);
->>>>>>> fc802da9de901189269ff852a7054ae8dd045921
 
 /* Функция закрывает соединение к базе данных */
 mysqli_close($link);
